@@ -2,10 +2,12 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from passlib.context import  CryptContext
 
-from database import (
+from .database import (
     get_users,
-    update_user
+    update_user,
+#    create_user,
 )
+#from .schema import User
 
 app = FastAPI()
 app.add_middleware(
@@ -36,4 +38,21 @@ async def hash_users():
 
 
 
+"""
+@app.post("/user/create")
+async def user_add(user: User):
+    u = await create_user(user.name, user.password)
+    print(u)
+    return {}
 
+@app.get("/user")
+async def get_users_list():
+    users = await get_users()
+    users = list(map(rem_id, users))
+    return {"users":users}
+
+
+def rem_id(x):
+    del x["id"]
+    return x
+"""

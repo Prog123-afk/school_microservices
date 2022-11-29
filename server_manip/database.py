@@ -1,4 +1,4 @@
-from config import get_settings
+from .config import get_settings
 from motor.motor_asyncio import AsyncIOMotorClient
 from bson.objectid import ObjectId
 
@@ -31,6 +31,10 @@ async def update_user(id: str,data: dict):
         if updated:
             return True
     return False
+
+async def create_user(name: str,password: str):
+    user = await users.insert_one({"name":name, "password":password })
+    return user
 
 
     
