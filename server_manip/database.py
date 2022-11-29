@@ -1,6 +1,8 @@
-from core.config import settings
+from config import get_settings
 from motor.motor_asyncio import AsyncIOMotorClient
 from bson.objectid import ObjectId
+
+settings = get_settings()
 
 client = AsyncIOMotorClient(settings.MONGO_URI)
 db = client.coders
